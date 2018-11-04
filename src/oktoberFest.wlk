@@ -8,9 +8,8 @@ class Carpas{
 
 
 class Jarra{
-	
 	var property capacidadDeJarra
-	var property marca	
+	var property marca
 }
 
 
@@ -18,51 +17,85 @@ class Jarra{
 
 class Persona{
 	var property peso 
-	var property cantidadDeJarrasCompradas
+	var property jarrasCompradas //lista de Jarra
 	var property leGustaLaMusicaTradicional
 	var property aguante
 	
 	
 	method estaEbrio(){
-		return  self.aguante() > self.peso() * self.alcoholIngerido()  
+		return  self.aguante() < (self.peso() * self.alcoholIngerido())  
 	}
 	
 	method alcoholIngerido(){
-		return 0 // para hacer
+		var marcasDeJarras = []
+		jarrasCompradas.forEach{jarra => marcasDeJarras.add(jarra.marca())}
+		return marcasDeJarras.sum{marca => marca.alcoholPorLitro()}
+	}
+	
+	method quieroEntrarACarpa(){
+		
 	}
 }
 
 
+class Belga inherits Persona {
+	
+	method gustoDeCerveza(){
+		return cantidadDeLupulo() > 4
+		
+	}
+}
 
-class MarcasRubias{
+class Checos inherits Persona {
+	method gustoDeCerveza(){
+		return 	graduacion() > 8
+		
+	}
+}
+
+
+class Alemanes inherits Persona{
+	method gustoDeCerveza(){}	
+}
+
+
+
+
+
+class MarcasRubias {
 	var property cantidadDeLupulo   // gramos de lupulo por litro
 	var property paisFabricador 
-	var property graduacion
+	var property graduacion   //porcentaje de alcohol
 
 	method alcoholPorLitro(){
-		self.graduacion() 
+		return self.graduacion() / 100
 	}	
 }
 
 
 
-class MarcasNegras{
+class MarcasNegras {
 	var property cantidadDeLupulo   // gramos de lupulo por litro
 	var property paisFabricador 
 	
 	method graduacion(){
-		return cantidadDeLupulo*2 
+		return (cantidadDeLupulo*2).min(graduacionReglamentaria.graduacionMundial()) 
 	}	
+	
+	method alcoholPorLitro(){
+		return self.graduacion() / 100
+	}
 }
 
 
 class MarcasRojas inherits MarcasNegras{
 	
-	
+	override method  graduacion(){
+		return super() * 1.5
+	}
 }
 
 object graduacionReglamentaria{
 	var property graduacionMundial
+		
 }
-
-//hacer un object valoresGlobales con una variable 

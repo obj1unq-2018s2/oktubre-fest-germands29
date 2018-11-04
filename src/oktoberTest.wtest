@@ -1,0 +1,34 @@
+import oktoberFest.*
+describe "test de okteber fest"{
+	
+	
+	var quilmes = new MarcasRubias(cantidadDeLupulo = 4, paisFabricador = "Argentina", graduacion =15 )
+	var jarraDeQuilmes = new Jarra(capacidadDeJarra = 2 , marca = quilmes)
+	
+	var quilmesBock = new MarcasNegras(cantidadDeLupulo = 10 , paisFabricador = "Argentina")
+	var jarraDeQuilmesBock = new Jarra(capacidadDeJarra = 1, marca = quilmesBock)
+	var persona1 = new Persona(peso = 80, jarrasCompradas = [jarraDeQuilmes, jarraDeQuilmesBock], leGustaLaMusicaTradicional = false, aguante = 40)
+	
+
+
+test "alcohol por litro de quilmes es 0.15"{
+	assert.equals(quilmes.alcoholPorLitro() , 0.15)
+}
+
+test "alcohol por litro de quilmes bock es 0.12"{
+	graduacionReglamentaria.graduacionMundial(12)
+	assert.equals(quilmesBock.alcoholPorLitro(), 0.12)
+}
+
+
+test "alcohol ingerido por persona1 es 0.27"{
+	graduacionReglamentaria.graduacionMundial(12)
+	assert.equals(persona1.alcoholIngerido(), 0.27)
+}
+
+test "persona1 esta ebria retorna false"{
+	graduacionReglamentaria.graduacionMundial(12)
+	assert.notThat(persona1.estaEbrio())
+}
+
+}
