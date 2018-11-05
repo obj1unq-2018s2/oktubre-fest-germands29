@@ -1,7 +1,20 @@
-class Carpas{
+class Carpa{
+	var property marcaDeCarpa
 	var property limiteDeGente 
-	var property tieneBanda 
+	var property tieneBandaTradicional
+	var property cantidadActualDeGente
 	method venderJarra(){}
+	
+	
+	method personaPuedeIngresar(persona){
+		return ((self.cantidadActualDeGente() + 1) <= self.limiteDeGente()) and not persona.estaEbrio()
+	}
+	
+	method ingresarACarpa(persona){
+		if (persona.puedoEntrarACarpa(self)){
+			cantidadActualDeGente = cantidadActualDeGente + 1
+		}
+	}
 }
 
 
@@ -32,30 +45,39 @@ class Persona{
 		return marcasDeJarras.sum{marca => marca.alcoholPorLitro()}
 	}
 	
-	method quieroEntrarACarpa(){
-		
+	method meGustaCerveza(marca){
+		return true
 	}
+	
+	method quieroEntrarACarpa(carpa){
+		return (self.leGustaLaMusicaTradicional() == carpa.tieneBandaTradicional()) and 
+				self.meGustaCerveza(carpa.marcaDeCarpa())
+	}
+	
+	method puedoEntrarACarpa(carpa){
+		return carpa.personaPuedeIngresar(self) and self.quieroEntrarACarpa(carpa)
+	}
+
 }
 
 
 class Belga inherits Persona {
 	
-	method gustoDeCerveza(){
-		return cantidadDeLupulo() > 4
+	override method meGustaCerveza(marca){
+		return marca.cantidadDeLupulo() > 4
 		
 	}
 }
 
 class Checos inherits Persona {
-	method gustoDeCerveza(){
-		return 	graduacion() > 8
+	override method meGustaCerveza(marca){
+		return 	marca.graduacion() > 8
 		
 	}
 }
 
-
-class Alemanes inherits Persona{
-	method gustoDeCerveza(){}	
+class Aleman inherits Persona {
+	
 }
 
 

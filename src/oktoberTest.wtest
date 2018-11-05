@@ -8,7 +8,9 @@ describe "test de okteber fest"{
 	var quilmesBock = new MarcasNegras(cantidadDeLupulo = 10 , paisFabricador = "Argentina")
 	var jarraDeQuilmesBock = new Jarra(capacidadDeJarra = 1, marca = quilmesBock)
 	var persona1 = new Persona(peso = 80, jarrasCompradas = [jarraDeQuilmes, jarraDeQuilmesBock], leGustaLaMusicaTradicional = false, aguante = 40)
+	var persona2 = new Persona(peso = 100 , jarrasCompradas = [jarraDeQuilmes], leGustaLaMusicaTradicional = false , aguante = 50)
 	
+	var carpa1 = new Carpa(marcaDeCarpa = quilmes, limiteDeGente = 35, tieneBandaTradicional = false, cantidadActualDeGente = 22)
 
 
 test "alcohol por litro de quilmes es 0.15"{
@@ -31,4 +33,20 @@ test "persona1 esta ebria retorna false"{
 	assert.notThat(persona1.estaEbrio())
 }
 
+
+test"persona 1 quiere entrar a carpa 1 retorna true"{
+	graduacionReglamentaria.graduacionMundial(12)
+	assert.that(persona1.quieroEntrarACarpa(carpa1))
+}
+
+test "carpa 1 deja ingresar a persona 1"{
+	graduacionReglamentaria.graduacionMundial(12)
+	assert.that(carpa1.personaPuedeIngresar(persona1))	
+}
+
+
+test "persona 1 puede ingresar a carpa 1"{
+	graduacionReglamentaria.graduacionMundial(12)
+	assert.that(persona1.puedoEntrarACarpa(carpa1))
+}
 }
